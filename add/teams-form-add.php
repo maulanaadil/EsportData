@@ -8,10 +8,10 @@ require('../functions/functions.php');
     <title>View Data Teams</title>
 </head>
 <body>
-<h1>Add Data Teams</h1>
+<h1>Add Data Team Page</h1>
 <a href="../teams.php">
     <button>
-        View Teams
+        View Team
     </button>
 </a>
 <form method="post" name="frm" action="teams-add.php">
