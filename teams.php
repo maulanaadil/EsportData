@@ -22,7 +22,7 @@ if ($db->errno == 0) {
     if (getTeamsSql()) {
         ?>
         <a href="./add/teams-form-add.php">
-            <button>Add Data</button>
+            <button>Add Team</button>
         </a>
         <table border="1">
             <tr>

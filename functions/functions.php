@@ -5,6 +5,14 @@ function dbConnect() {
     return $db;
 }
 
+
+function getDataPlayer() {
+    $db = dbConnect();
+    $sql = "Select playerId, CONCAT(firstName, ' ', lastName) AS Name, country, gender, teamName from players JOIN teams WHERE players.teamId = teams.teamId";
+    $res = $db->query($sql);
+    return $res;
+}
+
 function deleteDataTeams($teamId) {
     return "DELETE FROM teams WHERE teamId='$teamId'";
 }
@@ -55,7 +63,7 @@ function navigator() {
     ?>
     <div id="navigator">
         | <a href="teams.php">Teams</a>
-        | <a href="#">Players</a>
+        | <a href="players.php">Players</a>
         | <a href="#">Games</a>
         | <a href="logout.php">Logout</a>
         |
