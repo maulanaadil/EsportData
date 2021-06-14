@@ -57,7 +57,7 @@ if (isset($_GET['playerId'])) {
                                 <?php
                                 $dataTeam = getTeamsSql();
                                 foreach ($dataTeam as $data) {
-                                    echo "<option value\"". $data["teamId"] . "\"";
+                                    echo "<option value=\"". $data["teamId"] . "\"";
                                     if ($data["teamId"] == $dataPlayer["teamId"])
                                         echo " selected";
                                     echo ">" . $data["teamName"] . "</option>";

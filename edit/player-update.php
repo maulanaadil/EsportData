@@ -22,14 +22,14 @@ if (isset($_POST["btnUpdate"])) {
         if (mysqli_query($db, $sql)) {
             if ($db->affected_rows > 0) {
                 ?>Data Successfully Updated.<br>
-                <a href="../view/players.php.php">
-                    <button>View Teams</button>
+                <a href="../view/players.php">
+                    <button>View Players</button>
                 </a>
                 <?php
             } else {
                 ?>
                 Data Update Success. Without any data changes.<br>
-                <a href="../view/teams.php"><button>View Teams</button></a>
+                <a href="../view/teams.php"><button>View Players</button></a>
                 <?php
             }
         } else {
