@@ -24,7 +24,7 @@ if (isset($_POST["btnDelete"])) {
             echo "Data Failed to Delete.<br>";
         }
         ?>
-        <a href="../teams.php">
+        <a href="../view/teams.php">
             <button>View Teams</button>
         </a>
         <?php

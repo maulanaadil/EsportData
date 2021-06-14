@@ -1,6 +1,6 @@
 <?php
 session_start();
-require('../functions/functions.php');
+require('../../functions/functions.php');
 ?>
 
 <!DOCTYPE html>
@@ -19,7 +19,7 @@ if (isset($_GET["teamId"])) {
         <a href="../teams.php">
             <button>View Team</button>
         </a>
-        <form method="post" name="frm" action="teams-delete.php">
+        <form method="post" name="frm" action="../../delete/teams-delete.php">
             <input type="hidden" name="teamId" value="<?php echo $dataTeam["teamId"]; ?>">
             <table border="1">
                 <tr>

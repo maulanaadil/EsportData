@@ -1,11 +1,11 @@
 <?php
-require('../functions/functions.php');
+require('../../functions/functions.php');
 ?>
 
 <!DOCTYPE html>
 <html>
 <head>
-    <title>View Data Teams</title>
+    <title>Add Data Teams</title>
 </head>
 <body>
 <h1>Add Data Team Page</h1>
@@ -14,7 +14,7 @@ require('../functions/functions.php');
         View Team
     </button>
 </a>
-<form method="post" name="frm" action="teams-add.php">
+<form method="post" name="frm" action="../../add/teams-add.php">
     <table border="1">
         <tr>
             <td>Id Teams</td>

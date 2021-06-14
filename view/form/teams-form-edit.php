@@ -1,6 +1,6 @@
 <?php
 session_start();
-require('../functions/functions.php');
+require('../../functions/functions.php');
 ?>
 
 <!DOCTYPE html>
@@ -17,7 +17,7 @@ require('../functions/functions.php');
             if ($dataTeam = getDataTeams($teamId)) {
                 ?>
                 <a href="../teams.php"><button>View Team</button></a>
-                <form method="post" name="frm" action="teams-update.php">
+                <form method="post" name="frm" action="../../edit/teams-update.php">
                     <table border="1">
                         <tr>
                             <td>Id Team</td>

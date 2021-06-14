@@ -3,7 +3,7 @@ session_start();
 if (!isset($_SESSION["playerId"]))
     header("Location: index.php?error=4");
 
-require('./functions/functions.php');
+require('../functions/functions.php');
 ?>
 
 <!DOCTYPE html>
@@ -21,7 +21,7 @@ if ($db->errno == 0) {
     getTeamsSql();
     if (getTeamsSql()) {
         ?>
-        <a href="./add/teams-form-add.php">
+        <a href="form/teams-form-add.php">
             <button>Add Team</button>
         </a>
         <table border="1">
@@ -40,7 +40,7 @@ if ($db->errno == 0) {
                     <td><?php echo $barisdata["teamName"]; ?></td>
                     <td><?php echo $barisdata["region"]; ?></td>
                     <td>
-                        <a href="./edit/teams-form-edit.php?teamId=<?php echo urlencode(
+                        <a href="../view/form/teams-form-edit.php?teamId=<?php echo urlencode(
                             openssl_encrypt(
                                 $barisdata["teamId"],
                                 'aes-128-cbc',
@@ -51,15 +51,15 @@ if ($db->errno == 0) {
                         ); ?>">
                             <button>Edit</button>
                         </a>
-                        <a href="./delete/teams-confirm-delete.php?teamId=<?php echo urlencode(
+                            <a href="../view/confirm/teams-confirm-delete.php?teamId=<?php echo urlencode(
                                 openssl_encrypt(
-                                        $barisdata["teamId"],
+                                    $barisdata["teamId"],
                                     'aes-128-cbc',
                                     $_SESSION["passphrase"],
                                     0,
                                     $_SESSION["iv"]
                                 )
-                        ); ?>">
+                            ); ?>">
                             <button>Hapus</button>
                         </a>
                     </td>

@@ -5,22 +5,26 @@ require('../functions/functions.php');
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Add Team</title>
+    <title>Add Player</title>
 </head>
 <body>
 <?php
 if (isset($_POST["btnSubmit"])) {
     $db = dbConnect();
     if ($db->connect_errno == 0) {
-        $teamId = $db->escape_string($_POST["teamId"]);
-        $teamName = $db->escape_string($_POST["teamName"]);
-        $region = $db->escape_string($_POST["region"]);
-        $sql = addTeamsSql($teamId, $teamName, $region);
+        $playerId = $db->escape_string($_POST["playerId"]);
+        $lastName = $db->escape_string($_POST["lastName"]);
+        $firstName = $db->escape_string($_POST["firstName"]);
+        $country = $db->escape_string($_POST["country"]);
+        $teamId = $db->escape_string($_POST["teamName"]);
+        $gender = $db->escape_string($_POST["gender"]);
+        $password = md5($_POST['password']);
+        $sql = addPlayerSql($playerId, $lastName, $firstName, $country, $teamId, $gender, $password);
         if (mysqli_query($db, $sql)) {
             if ($db->affected_rows > 0) {
                 ?>
                 Data Successfully Added.<br>
-                <a href="../view/teams.php">
+                <a href="../view/players.php">
                     <button>View Teams</button>
                 </a>
                 <?php
@@ -35,8 +39,10 @@ if (isset($_POST["btnSubmit"])) {
         }
     } else {
         echo "Failed Connection" . (DEVELOPMENT ? " : " . $db->connect_error : "") . "<br>";
+
     }
 }
 ?>
 </body>
 </html>
+
