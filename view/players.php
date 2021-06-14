@@ -10,6 +10,7 @@ require('../functions/functions.php');
 <head>
     <title>View Players</title>
 </head>
+<body>
 <?php banner(); ?>
 <?php navigator(); ?>
 <h1>Data Players</h1>
@@ -28,6 +29,7 @@ if ($db->connect_errno == 0) {
             <td>Country</td>
             <td>Gender</td>
             <td>Team</td>
+            <td>Action</td>
         </tr>
             <?php
             $data = getPlayerSql();
@@ -51,7 +53,15 @@ if ($db->connect_errno == 0) {
                     ); ?>">
                         <button>Edit</button>
                     </a>
-                    <a href="#">
+                    <a href="../view/confirm/players-confirm-delete.php?playerId=<?php echo urlencode(
+                        openssl_encrypt(
+                            $barisData["playerId"],
+                            'aes-128-cbc',
+                            $_SESSION["passphrase"],
+                            0,
+                            $_SESSION["iv"]
+                        )
+                    ); ?>">
                         <button>Hapus</button>
                     </a>
                 </td>

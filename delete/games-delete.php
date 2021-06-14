@@ -5,15 +5,15 @@ require('../functions/functions.php');
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Delete Team</title>
+    <title>Delete Games</title>
 </head>
 <body>
 <?php
 if (isset($_POST["btnDelete"])) {
     $db = dbConnect();
     if ($db->connect_errno == 0) {
-        $teamId = $db->escape_string($_POST["teamId"]);
-        $sql = deleteDataTeams($teamId);
+        $gamesId = $db->escape_string($_POST["gamesId"]);
+        $sql = deleteDataGames($gamesId);
         if (mysqli_query($db, $sql)) {
             if ($db->affected_rows > 0) {
                 echo "Data Successfully Deleted.<br>";
@@ -24,8 +24,8 @@ if (isset($_POST["btnDelete"])) {
             echo "Data Failed to Delete.<br>";
         }
         ?>
-        <a href="../view/teams.php">
-            <button>View Teams</button>
+        <a href="../view/games.php">
+            <button>View Games</button>
         </a>
         <?php
     } else {

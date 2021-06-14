@@ -12,8 +12,8 @@ require('../functions/functions.php');
 if (isset($_POST["btnDelete"])) {
     $db = dbConnect();
     if ($db->connect_errno == 0) {
-        $teamId = $db->escape_string($_POST["teamId"]);
-        $sql = deleteDataTeams($teamId);
+        $playerId = $db->escape_string($_POST["playerId"]);
+        $sql = deleteDataPlayers($playerId);
         if (mysqli_query($db, $sql)) {
             if ($db->affected_rows > 0) {
                 echo "Data Successfully Deleted.<br>";
@@ -24,8 +24,8 @@ if (isset($_POST["btnDelete"])) {
             echo "Data Failed to Delete.<br>";
         }
         ?>
-        <a href="../view/teams.php">
-            <button>View Teams</button>
+        <a href="../view/players.php">
+            <button>View Players</button>
         </a>
         <?php
     } else {

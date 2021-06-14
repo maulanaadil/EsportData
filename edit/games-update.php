@@ -3,33 +3,30 @@ require('../functions/functions.php');
 ?>
 
 <!DOCTYPE html>
-<htmL>
+<html>
 <head>
-    <title>Update Player</title>
+    <title>Update Games</title>
 </head>
 <body>
 <?php
 if (isset($_POST["btnUpdate"])) {
     $db = dbConnect();
     if ($db->connect_errno == 0) {
+        $gamesId = $db->escape_string($_POST["gamesId"]);
+        $gamesName = $db->escape_string($_POST["gamesName"]);
         $playerId = $db->escape_string($_POST["playerId"]);
-        $lastName = $db->escape_string($_POST["lastName"]);
-        $firstName = $db->escape_string($_POST["firstName"]);
-        $country = $db->escape_string($_POST["country"]);
-        $gender = $db->escape_string($_POST["gender"]);
-        $teamName = $db->escape_string($_POST["teamName"]);
-        $sql = updateDataPlayer($playerId, $lastName, $firstName, $country, $teamName, $gender);
+        $sql = updateDataGames($gamesId, $gamesName, $playerId);
         if (mysqli_query($db, $sql)) {
             if ($db->affected_rows > 0) {
                 ?>Data Successfully Updated.<br>
-                <a href="../view/players.php">
-                    <button>View Players</button>
+                <a href="../view/games.php">
+                    <button>View Games</button>
                 </a>
                 <?php
             } else {
                 ?>
                 Data Update Success. Without any data changes.<br>
-                <a href="../view/players.php"><button>View Players</button></a>
+                <a href="../view/games.php"><button>View Games</button></a>
                 <?php
             }
         } else {
@@ -45,4 +42,4 @@ if (isset($_POST["btnUpdate"])) {
 }
 ?>
 </body>
-</htmL>
+</html>
