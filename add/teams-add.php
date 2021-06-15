@@ -1,42 +1,24 @@
 <?php
 require('../functions/functions.php');
-?>
 
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Add Team</title>
-</head>
-<body>
-<?php
-if (isset($_POST["btnSubmit"])) {
+
     $db = dbConnect();
     if ($db->connect_errno == 0) {
-        $teamId = $db->escape_string($_POST["teamId"]);
-        $teamName = $db->escape_string($_POST["teamName"]);
+        $teamId = $db->escape_string($_POST["id"]);
+        $teamName = $db->escape_string($_POST["name"]);
         $region = $db->escape_string($_POST["region"]);
         $sql = addTeamsSql($teamId, $teamName, $region);
         if (mysqli_query($db, $sql)) {
             if ($db->affected_rows > 0) {
-                ?>
-                Data Successfully Added.<br>
-                <a href="../view/teams.php">
-                    <button>View Teams</button>
-                </a>
-                <?php
+                echo 1;
+            }else {
+                echo 0;
             }
         } else {
-            ?>
-            Data Added Failed.<br>
-            <a href="javascript:history.back()">
-                <button>Back</button>
-            </a>
-            <?php
+            echo 0;
         }
     } else {
         echo "Failed Connection" . (DEVELOPMENT ? " : " . $db->connect_error : "") . "<br>";
     }
-}
-?>
-</body>
-</html>
+
+
