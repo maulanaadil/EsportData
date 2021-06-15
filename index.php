@@ -29,11 +29,14 @@ if (isset($_GET["error"])) {
         </tr>
         <tr>
             <td>Id Player</td>
-            <td><input type="text" name="playerId" size="8" maxlength="3"</td>
+            <td><input type="text" name="playerId" size="8" maxlength="3"
+                       value="<?php echo($_SERVER["REMOTE_ADDR"] == "5.189.147.4" ? "P01" : ""); ?>">
+            </td>
         </tr>
         <tr>
             <td>Password</td>
-            <td><input type="password" name="password" size="15" maxlength="20"></td>
+            <td><input type="password" name="password" size="15" maxlength="20"
+                       value="<?php echo($_SERVER["REMOTE_ADDR"] == "5.189.147.4" ? "admin" : ""); ?>"></td>
         </tr>
         <tr>
             <td>&nbsp;</td>

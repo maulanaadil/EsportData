@@ -1,7 +1,7 @@
 <?php
 session_start();
 if (!isset($_SESSION["playerId"]))
-    header("Location: index.php?error=4");
+    header("Location: ../index.php?error=4");
 require('../functions/functions.php');
 ?>
 
@@ -14,63 +14,72 @@ require('../functions/functions.php');
 <?php banner(); ?>
 <?php navigator(); ?>
 <h1>Data Players</h1>
+<form method="get" action="">
+    <label for="search">Search Teams</label>
+    <input type="text" name="search">
+</form>
+<br>
 <?php
 $db = dbConnect();
 if ($db->connect_errno == 0) {
     getPlayerSql();
     if (getPlayerSql()) {
         ?>
-    <a href="form/players-form-add.php"><button>Add Player</button>
-    </a>
-    <table border="1">
-        <tr>
-            <td>Player Id</td>
-            <td>Name</td>
-            <td>Country</td>
-            <td>Gender</td>
-            <td>Team</td>
-            <td>Action</td>
-        </tr>
+        <a href="form/players-form-add.php">
+            <button>Add Player</button>
+        </a>
+        <table border="1">
+            <tr>
+                <td>Player Id</td>
+                <td>Name</td>
+                <td>Country</td>
+                <td>Gender</td>
+                <td>Team</td>
+                <td>Action</td>
+            </tr>
             <?php
             $data = getPlayerSql();
+            if (isset($_GET['search'])) {
+                $data = mysqli_query($db, "Select playerId, CONCAT(firstName, ' ', lastName) AS Name, country, gender, teamName from players JOIN teams ON players.teamId = teams.teamId WHERE CONCAT(firstName, ' ', lastName) LIKE '%". $_GET['search'] . "%'");
+            }
             foreach ($data as $barisData) {
                 ?>
-            <tr>
-                <td><?php echo $barisData["playerId"]; ?></td>
-                <td><?php echo $barisData["Name"]; ?></td>
-                <td><?php echo $barisData["country"]; ?></td>
-                <td><?php echo $barisData["gender"]; ?></td>
-                <td><?php echo $barisData["teamName"]; ?></td>
-                <td>
-                    <a href="../view/form/players-form-edit.php?playerId=<?php echo urlencode(
+                <tr>
+                    <td><?php echo $barisData["playerId"]; ?></td>
+                    <td><?php echo $barisData["Name"]; ?></td>
+                    <td><?php echo $barisData["country"]; ?></td>
+                    <td><?php echo $barisData["gender"]; ?></td>
+                    <td><?php echo $barisData["teamName"]; ?></td>
+                    <td>
+                        <a href="../view/form/players-form-edit.php?playerId=<?php echo urlencode(
                             openssl_encrypt(
-                                    $barisData["playerId"],
+                                $barisData["playerId"],
                                 'aes-128-cbc',
                                 $_SESSION["passphrase"],
                                 0,
                                 $_SESSION["iv"]
                             )
-                    ); ?>">
-                        <button>Edit</button>
-                    </a>
-                    <a href="../view/confirm/players-confirm-delete.php?playerId=<?php echo urlencode(
-                        openssl_encrypt(
-                            $barisData["playerId"],
-                            'aes-128-cbc',
-                            $_SESSION["passphrase"],
-                            0,
-                            $_SESSION["iv"]
-                        )
-                    ); ?>">
-                        <button>Hapus</button>
-                    </a>
-                </td>
-            </tr>
-        <?php
+                        ); ?>">
+                            <button>Edit</button>
+                        </a>
+                        <a href="../view/confirm/players-confirm-delete.php?playerId=<?php echo urlencode(
+                            openssl_encrypt(
+                                $barisData["playerId"],
+                                'aes-128-cbc',
+                                $_SESSION["passphrase"],
+                                0,
+                                $_SESSION["iv"]
+                            )
+                        ); ?>">
+                            <button>Hapus</button>
+                        </a>
+                    </td>
+                </tr>
+                <?php
             }
             ?>
-    </table>
-    <?php
+        </table>
+        <?php
     } else
         echo "Failed Execution SQL" . (DEVELOPMENT ? " : " . $db->error : "") . "<br>";
 } else

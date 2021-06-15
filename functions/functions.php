@@ -162,7 +162,6 @@ function navigator()
         | <a href="../../tugasAtol/view/teams.php">Teams</a>
         | <a href="../../tugasAtol/view/players.php">Players</a>
         | <a href="../../tugasAtol/view/games.php">Games</a>
-        | <a href="#">Change Password</a>
         | <a href="../logout.php">Logout</a>
         |
     </div>

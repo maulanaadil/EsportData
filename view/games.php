@@ -1,7 +1,7 @@
 <?php
 session_start();
 if (!isset($_SESSION["playerId"]))
-    header("Location: index.php?error=4");
+    header("Location: ../index.php?error=4");
 require('../functions/functions.php');
 ?>
 
@@ -14,6 +14,11 @@ require('../functions/functions.php');
 <?php banner(); ?>
 <?php navigator(); ?>
 <h1>View Games Played By Players</h1>
+<form method="get" action="">
+    <label for="search">Search Teams</label>
+    <input type="text" name="search">
+</form>
+<br>
 <?php
 $db = dbConnect();
 if ($db->connect_errno == 0) {
@@ -33,6 +38,10 @@ if ($db->connect_errno == 0) {
             </tr>
             <?php
             $data = getGamesSql();
+            if (isset($_GET['search'])) {
+                $data = mysqli_query($db, "");
+                // add query
+            }
             foreach ($data as $barisData) {
                 ?>
                 <tr>

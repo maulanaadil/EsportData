@@ -15,6 +15,13 @@ require('../functions/functions.php');
 <?php banner(); ?>
 <?php navigator(); ?>
 <h1>Data Teams</h1>
+
+<form method="get" action="">
+    <label for="search">Search Teams</label>
+    <input type="text" name="search">
+</form>
+
+<br>
 <?php
 $db = dbConnect();
 if ($db->errno == 0) {
@@ -33,6 +40,9 @@ if ($db->errno == 0) {
             </tr>
             <?php
             $data = getTeamsSql()->fetch_all(MYSQLI_ASSOC); // ambil seluruh baris data
+            if (isset($_GET['search'])) {
+                $data = mysqli_query($db, "SELECT * FROM teams WHERE CONCAT(teamName, ' ', region)  LIKE '%". $_GET['search'] . "%'");
+            }
             foreach ($data as $barisdata) { // telurusi satu per satu
                 ?>
                 <tr>
