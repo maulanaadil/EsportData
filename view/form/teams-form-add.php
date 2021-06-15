@@ -21,7 +21,8 @@ require('../../functions/functions.php');
                     </div><!-- /.col -->
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="../view/index-admin.php">Home</a></li>
+                            <li class="breadcrumb-item"><a href="../index-admin.php">Home</a></li>
+                            <li class="breadcrumb-item"><a href="../teams.php">Teams</a></li>
                             <li class="breadcrumb-item active">Add Teams</li>
                         </ol>
                     </div><!-- /.col -->
@@ -49,37 +50,16 @@ require('../../functions/functions.php');
                                 <div class="card-body">
                                     <div class="form-group">
                                         <label for="exampleInputEmail1">Team ID</label>
-                                        <input type="text" class="form-control" id="text_id" placeholder="Enter TeamID">
+                                        <input type="text" class="form-control" id="text_id" placeholder="Enter TeamID" required="required">
                                     </div>
                                     <div class="form-group">
                                         <label for="exampleInputPassword1">Team Name</label>
-                                        <input type="text" class="form-control" id="text_name" placeholder="Enter Team Name">
+                                        <input type="text" class="form-control" id="text_name" placeholder="Enter Team Name" required="required">
                                     </div>
                                     <div class="form-group">
                                         <label for="exampleInputPassword1">Region</label>
-                                        <input type="text" class="form-control" id="text_region" placeholder="Enter Region">
+                                        <input type="text" class="form-control" id="text_region" placeholder="Enter Region" required="required">
                                     </div>
-                                    <div class="form-group">
-                                        <label for="exampleInputPassword1">Example Select</label>
-                                        <select name="gender" class="form-control" id="text_gender">
-                                            <option>Select Gender</option>
-                                            <option value="male">Male</option>
-                                            <option value="female">Female</option>
-                                        </select>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="exampleInputPassword1">Example Select 2</label>
-                                        <select name="teamName" class="form-control" id="text_team">
-                                            <option>Select Your Team</option>
-                                            <?php
-                                            $dataTeam = getTeamsSql();
-                                            foreach ($dataTeam as $data) {
-                                                echo "<option value=\"" . $data["teamId"] . "\">". $data["teamName"]. "</option>";
-                                            }
-                                            ?>
-                                        </select>
-                                    </div>
-
                                 </div>
                                 <!-- /.card-body -->
 
@@ -105,6 +85,37 @@ require('../../functions/functions.php');
         let name = $("#text_name").val();
         let region = $("#text_region").val();
 
+
+        if (id == "") {
+            swal({
+                title: "Error!",
+                text: "Must Fill The Team ID",
+                icon: "error",
+                button: "OK!",
+            })
+            return false;
+        } else
+            if (name == "") {
+            swal({
+                title: "Error!",
+                text: "Must Fill Team Name",
+                icon: "error",
+                button: "OK!",
+            })
+            return false;
+        } else
+            if (region == "") {
+            swal({
+                title: "Error!",
+                text: "Must Fill Region",
+                icon: "error",
+                button: "OK!",
+            })
+            return false;
+        }
+
+
+
         swal({
             title: "Are you sure?",
             text: "Once saved, you will not be able to recover this imaginary file!",
@@ -120,7 +131,7 @@ require('../../functions/functions.php');
                         url : "../../add/teams-add.php",
                         type:"POST",
                         success: function(response){
-                            if(response===1){
+                            if(response == 1){
                                 swal({
                                     title: "Success Inserted!",
                                     text: "You clicked the button!",
@@ -133,7 +144,7 @@ require('../../functions/functions.php');
 
                             }else{
                                 swal({
-                                    title: "Fail Deleted!",
+                                    title: "Fail Inserted!",
                                     text: "You clicked the button!",
                                     icon: "error",
                                     button: "OK!",

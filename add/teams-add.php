@@ -1,7 +1,5 @@
 <?php
 require('../functions/functions.php');
-
-
     $db = dbConnect();
     if ($db->connect_errno == 0) {
         $teamId = $db->escape_string($_POST["id"]);
@@ -11,7 +9,7 @@ require('../functions/functions.php');
         if (mysqli_query($db, $sql)) {
             if ($db->affected_rows > 0) {
                 echo 1;
-            }else {
+            } else {
                 echo 0;
             }
         } else {

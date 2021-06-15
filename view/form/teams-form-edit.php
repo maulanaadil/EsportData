@@ -18,12 +18,13 @@ require('../../functions/functions.php');
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h4 class="mb-0 text-dark"> Edit Teams </h4>
+                        <h4 class="mb-0 text-dark"> Edit Team </h4>
                     </div><!-- /.col -->
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="../view/index-admin.php">Home</a></li>
-                            <li class="breadcrumb-item active">Edit Teams</li>
+                            <li class="breadcrumb-item"><a href="../index-admin.php">Home</a></li>
+                            <li class="breadcrumb-item"><a href="../teams.php">Teams</a></li>
+                            <li class="breadcrumb-item active">Edit Team</li>
                         </ol>
                     </div><!-- /.col -->
                 </div><!-- /.row -->
