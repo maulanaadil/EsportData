@@ -159,7 +159,7 @@ require('../functions/functions.php');
                                                 $disabled="";
                                             }
                                             ?>
-                                            <li class="page-item <?= $disabled; ?>"><a class="page-link" href="?page=<?php echo $x ?>><?php echo $x; ?></a></li>
+                                            <li class="page-item <?= $disabled; ?>"><a class="page-link" href="?page=<?php echo $x ?>"><?php echo $x; ?></a></li>
                                             <?php
                                         }
                                         ?>

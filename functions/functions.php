@@ -79,14 +79,36 @@ function addGamesSql($gameName, $playerId)
     return "INSERT INTO games(gameName, playerId) VALUES ('$gameName','$playerId')";
 }
 
-function getGamesSql()
+function getGamesSql($limit, $halaman)
 {
     $db = dbConnect();
     $sql = "SELECT games.gameId, CONCAT(players.firstName, ' ',players.lastName) as name, games.gameName, teams.teamName, teams.region
             FROM games 
                 JOIN players ON players.playerId = games.playerId       
+                JOIN teams ON players.teamId = teams.teamId
+                limit $limit, $halaman";
+    return $db->query($sql);
+}
+
+function getGamesSqlCount()
+{
+    $db = dbConnect();
+    $sql = "SELECT count(*) as jml, games.gameId, CONCAT(players.firstName, ' ',players.lastName) as name, games.gameName, teams.teamName, teams.region
+            FROM games 
+                JOIN players ON players.playerId = games.playerId       
                 JOIN teams ON players.teamId = teams.teamId";
     return $db->query($sql);
+}
+
+function getGamesSearchSqlCount()
+{
+    $db = dbConnect();
+    $sql = "SELECT count(*) as jml, games.gameId, CONCAT(players.firstName, ' ',players.lastName) as name, games.gameName, teams.teamName, teams.region
+                                                                                FROM games 
+                                                                                    JOIN players ON players.playerId = games.playerId       
+                                                                                    JOIN teams ON players.teamId = teams.teamId WHERE CONCAT(gameName, ' ',firstName, ' ', lastName, ' ', teamName) LIKE '%" . $_GET['search'] . "%'";
+    return $db->query($sql);
+
 }
 
 // Players
@@ -129,10 +151,25 @@ function addPlayerSql($playerId, $lastName, $firstName, $country, $teamId, $gend
     return "INSERT INTO players(playerId, lastName, firstName, country, teamId, gender, password) VALUES ('$playerId', '$lastName', '$firstName', '$country', '$teamId', '$gender', '$password')";
 }
 
-function getPlayerSql()
+function getPlayerSql($limit, $halaman)
 {
     $db = dbConnect();
-    $sql = "Select playerId, CONCAT(firstName, ' ', lastName) AS Name, country, gender, teamName from players JOIN teams WHERE players.teamId = teams.teamId";
+    $sql = "Select playerId, CONCAT(firstName, ' ', lastName) AS Name, country, gender, teamName from players JOIN teams WHERE players.teamId = teams.teamId limit $limit, $halaman ";
+//    SELECT * FROM teams limit $limit , $halaman
+    return $db->query($sql);
+}
+
+function getPlayerSqlCount()
+{
+    $db = dbConnect();
+    $sql = "Select  count(*) as jml ,playerId, CONCAT(firstName, ' ', lastName) AS Name, country, gender, teamName from players JOIN teams WHERE players.teamId = teams.teamId";
+    return $db->query($sql);
+}
+
+function getPlayerSearchSqlCount()
+{
+    $db = dbConnect();
+    $sql = "Select count(*) as jml, playerId, CONCAT(firstName, ' ', lastName) AS Name, country, gender, teamName from players JOIN teams ON players.teamId = teams.teamId WHERE CONCAT(firstName, ' ', lastName) LIKE '%" . $_GET['search'] . "%'";
     return $db->query($sql);
 }
 
@@ -166,7 +203,7 @@ function getDataTeams($teamId)
         return FALSE;
 }
 
-function getTeamsSql($limit , $halaman)
+function getTeamsSql($limit, $halaman)
 {
 
     $db = dbConnect();
@@ -180,14 +217,13 @@ function getTeamsSqlcount()
     $sql = "SELECT count(*) as jml FROM teams";
     return $db->query($sql);
 }
+
 function getTeamsSearchSqlcount()
 {
     $db = dbConnect();
     $sql = "SELECT count(*) as jml FROM teams WHERE CONCAT(teamName, ' ', region)  LIKE '%" . $_GET['search'] . "%'";
     return $db->query($sql);
 }
-
-
 
 
 function addTeamsSql($teamId, $teamName, $region)
