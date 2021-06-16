@@ -7,12 +7,16 @@ require('functions/functions.php')
 <head>
     <title>Login</title>
 
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <!-- Font Awesome -->
-        <link rel="stylesheet" href="assets/fontawesome-free/css/all.min.css">
-        <link rel="stylesheet" href="assets/css/adminlte.min.css">
+    <link rel="icon" href=
+    "https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png"
+          type="image/x-icon">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="assets/fontawesome-free/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/adminlte.min.css">
 
 </head>
 <body class="hold-transition login-page">
@@ -38,9 +42,10 @@ require('functions/functions.php')
                     showError("Unknown Error.");
             } ?>
 
-            <form method="post"  action="login.php">
+            <form method="post" action="login.php">
                 <div class="input-group mb-3">
-                    <input type="text" name="playerId" size="8" maxlength="3" class="form-control" placeholder="ID Player"
+                    <input type="text" name="playerId" size="8" maxlength="3" class="form-control"
+                           placeholder="ID Player"
                            value="<?php echo($_SERVER["REMOTE_ADDR"] == "5.189.147.4" ? "P01" : ""); ?>">
                     <div class="input-group-append">
                         <div class="input-group-text">
@@ -49,7 +54,8 @@ require('functions/functions.php')
                     </div>
                 </div>
                 <div class="input-group mb-3">
-                    <input type="password" name="password" size="15" maxlength="20" class="form-control" placeholder="Password"
+                    <input type="password" name="password" size="15" maxlength="20" class="form-control"
+                           placeholder="Password"
                            value="<?php echo($_SERVER["REMOTE_ADDR"] == "5.189.147.4" ? "admin" : ""); ?>">
                     <div class="input-group-append">
                         <div class="input-group-text">
@@ -59,7 +65,7 @@ require('functions/functions.php')
                 </div>
                 <div class="social-auth-links text-center mb-3">
                     <button class="btn btn-block btn-primary" name="btnLogin">
-                         Login / Masuk
+                        Login / Masuk
                     </button>
                 </div>
             </form>

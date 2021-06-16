@@ -283,6 +283,10 @@ function templateAdd()
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
+    <link rel = "icon" href =
+    "https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png"
+          type = "image/x-icon">
+
     <!-- Font Awesome -->
     <link rel="stylesheet" href="../../assets/fontawesome-free/css/all.min.css">
     <link rel="stylesheet" href="../../assets/css/adminlte.min.css">
@@ -300,6 +304,11 @@ function template()
     ?>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel = "icon" href =
+    "https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png"
+
+          type = "image/x-icon">
 
     <!-- Font Awesome -->
     <link rel="stylesheet" href="../assets/fontawesome-free/css/all.min.css">
