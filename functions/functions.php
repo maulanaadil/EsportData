@@ -155,7 +155,12 @@ function getPlayerSql($limit, $halaman)
 {
     $db = dbConnect();
     $sql = "Select playerId, CONCAT(firstName, ' ', lastName) AS Name, country, gender, teamName from players JOIN teams WHERE players.teamId = teams.teamId limit $limit, $halaman ";
-//    SELECT * FROM teams limit $limit , $halaman
+    return $db->query($sql);
+}
+
+function getPlayerSql1() {
+    $db = dbConnect();
+    $sql = "Select playerId, CONCAT(firstName, ' ', lastName) AS Name, country, gender, teamName from players JOIN teams WHERE players.teamId = teams.teamId";
     return $db->query($sql);
 }
 
@@ -211,6 +216,11 @@ function getTeamsSql($limit, $halaman)
     return $db->query($sql);
 }
 
+function getTeamSql1() {
+    $db = dbConnect();
+    $sql = "SELECT * FROM teams";
+    return $db->query($sql);
+}
 function getTeamsSqlcount()
 {
     $db = dbConnect();
@@ -328,7 +338,7 @@ function getMenuAdd()
     <!-- Main Sidebar Container -->
     <aside class="main-sidebar sidebar-dark-primary elevation-4">
         <!-- Brand Logo -->
-        <a href="../view/index-admin.php" class="brand-link">
+        <a href="../../view/index-admin.php" class="brand-link">
             <span class="brand-text font-weight-light"><i class="fa fa-gamepad"></i> E-SPORT</span>
         </a>
 
@@ -417,7 +427,7 @@ function getMenu()
     <!-- Main Sidebar Container -->
     <aside class="main-sidebar sidebar-dark-primary elevation-4">
         <!-- Brand Logo -->
-        <a href="#" class="brand-link">
+        <a href="../view/index-admin.php" class="brand-link">
             <span class="brand-text font-weight-light"><i class="fa fa-gamepad"></i> E-SPORT</span>
         </a>
 

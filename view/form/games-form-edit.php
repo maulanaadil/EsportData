@@ -67,7 +67,7 @@ require('../../functions/functions.php');
                                     <select name="teamName" class="form-control" id="text_player">
                                         <option value="">Select Player Name</option>
                                         <?php
-                                        $dataPlayer = getPlayerSql();
+                                        $dataPlayer = getPlayerSql1();
                                         foreach ($dataPlayer as $data) {
                                             echo "<option value=\"" . $data["playerId"] . "\"";
                                             if ($data["playerId"] == $dataGames["playerId"])

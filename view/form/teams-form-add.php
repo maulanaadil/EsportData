@@ -71,13 +71,10 @@ require('../../functions/functions.php');
                     </div>
                 </div>
             </div>
-                        <!-- /.card -->
+            <!-- /.card -->
         </div>
     </div>
-
-
     <?php getFooter(); ?>
-
 </div>
 <script type="text/javascript">
     function doSave(){

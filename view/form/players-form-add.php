@@ -85,7 +85,7 @@ require('../../functions/functions.php');
                                     <select name="teamName" class="form-control" id="text_team">
                                         <option value="">Select Your Team</option>
                                         <?php
-                                        $dataTeam = getTeamsSql();
+                                        $dataTeam = getTeamSql1();
                                         foreach ($dataTeam as $data) {
                                             echo "<option value=\"" . $data["teamId"] . "\">" . $data["teamName"] . "</option>";
                                         }
@@ -103,6 +103,7 @@ require('../../functions/functions.php');
                     </div>
                 </div>
             </div>
+
             <!-- /.card -->
         </div>
     </div>
