@@ -72,7 +72,15 @@ require('../functions/functions.php');
                                 <br>
                                 <?php
                                 $db = dbConnect();
-                                if (getTeamsSql()) {
+                                $halaman = isset($_GET['page'])?(int)$_GET['page'] : 1;
+                                $batas =5;
+                                $halaman_awal = ($halaman>1) ? ($halaman * $batas) - $batas : 0;
+                                $previous = $halaman - 1;
+                                $next = $halaman + 1;
+                                $jumlah = getTeamsSqlcount()->fetch_array();
+                                $total_halaman = ceil($jumlah['jml']/$batas);
+
+                                if (getTeamsSql(0,5)) {
                                 ?>
 
                                 <div class="card-body table-responsive p-0">
@@ -87,9 +95,16 @@ require('../functions/functions.php');
                                         </tr>
                                         </thead>
                                         <?php
-                                        $data = getTeamsSql()->fetch_all(MYSQLI_ASSOC); // ambil seluruh baris data
+
+                                        $data = getTeamsSql($halaman_awal,$batas )->fetch_all(MYSQLI_ASSOC); // ambil seluruh baris data
                                         if (isset($_GET['search'])) {
+                                            $halaman = isset($_GET['page'])?(int)$_GET['page'] : 1;
                                             $data = mysqli_query($db, "SELECT * FROM teams WHERE CONCAT(teamName, ' ', region)  LIKE '%" . $_GET['search'] . "%'");
+                                            $halaman_awal = ($halaman>1) ? ($halaman * $batas) - $batas : 0;
+                                            $previous = $halaman - 1;
+                                            $next = $halaman + 1;
+                                            $jumlahSearch = getTeamsSearchSqlcount()->fetch_array();
+                                            $total_halaman =  ceil($jumlahSearch['jml']/$batas);
                                         }
                                         foreach ($data as $barisdata) { // telurusi satu per satu
                                             ?>
@@ -132,11 +147,26 @@ require('../functions/functions.php');
 
                                 <div class="card-footer clearfix">
                                     <ul class="pagination pagination-sm m-0 float-right">
-                                        <li class="page-item"><a class="page-link" href="#">&laquo;</a></li>
-                                        <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                        <li class="page-item"><a class="page-link" href="#">&raquo;</a></li>
+                                        <li class="page-item">
+                                            <a class="page-link" <?php if($halaman > 1){ echo "href='?page=$previous'"; } ?>>Previous</a>
+                                        </li>
+                                        <?php
+
+                                        for($x=1;$x<=$total_halaman;$x++){
+                                            if($total_halaman==1){
+                                                $disabled="disabled";
+                                            }else{
+                                                $disabled="";
+                                            }
+                                            ?>
+                                            <li class="page-item <?= $disabled; ?>"><a class="page-link" href="?page=<?php echo $x ?>><?php echo $x; ?></a></li>
+                                            <?php
+                                        }
+                                        ?>
+                                        <li class="page-item">
+                                            <a  class="page-link" <?php if($halaman < $total_halaman) { echo "href='?page=$next'"; } ?>>Next</a>
+                                        </li>
+
                                     </ul>
                                 </div>
                             </div>

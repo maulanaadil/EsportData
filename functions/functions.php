@@ -166,12 +166,29 @@ function getDataTeams($teamId)
         return FALSE;
 }
 
-function getTeamsSql()
+function getTeamsSql($limit , $halaman)
 {
+
     $db = dbConnect();
-    $sql = "SELECT * FROM teams ";
+    $sql = "SELECT * FROM teams limit $limit , $halaman";
     return $db->query($sql);
 }
+
+function getTeamsSqlcount()
+{
+    $db = dbConnect();
+    $sql = "SELECT count(*) as jml FROM teams";
+    return $db->query($sql);
+}
+function getTeamsSearchSqlcount()
+{
+    $db = dbConnect();
+    $sql = "SELECT count(*) as jml FROM teams WHERE CONCAT(teamName, ' ', region)  LIKE '%" . $_GET['search'] . "%'";
+    return $db->query($sql);
+}
+
+
+
 
 function addTeamsSql($teamId, $teamName, $region)
 {
