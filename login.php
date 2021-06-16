@@ -17,7 +17,7 @@ if ($db->connect_errno == 0) {
                 $_SESSION["lastName"]  = $data["lastName"];
                 $_SESSION["passphrase"] = openssl_random_pseudo_bytes(16);
                 $_SESSION["iv"] = openssl_random_pseudo_bytes(16);
-                header("Location: index-admin.php");
+                header("Location: view/index-admin.php");
             } else
                 header("Location: index.php?error=1");
         }

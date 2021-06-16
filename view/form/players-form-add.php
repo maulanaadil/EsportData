@@ -22,6 +22,7 @@ require('../../functions/functions.php');
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="../index-admin.php">Home</a></li>
+                            <li class="breadcrumb-item"><a href="../players.php">Players</a></li>
                             <li class="breadcrumb-item active">Add Player</li>
                         </ol>
                     </div><!-- /.col -->

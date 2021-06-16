@@ -18,7 +18,7 @@ require('../../functions/functions.php');
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h4 class="mb-0 text-dark"> Edit Game </h4>
+                        <h4 class="mb-0 text-dark"> Edit Player </h4>
                     </div><!-- /.col -->
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
@@ -49,7 +49,7 @@ require('../../functions/functions.php');
                                 <!-- general form elements -->
                                 <div class="card card-info">
                                     <div class="card-header">
-                                        <h3 class="card-title">Form Edit Players</h3>
+                                        <h3 class="card-title">Form Edit Player</h3>
                                     </div>
 
                                     <!-- /.card-header -->
@@ -124,9 +124,62 @@ require('../../functions/functions.php');
     <?php getFooter(); ?>
 
 </div>
+<script type="text/javascript">
+    function doSave() {
+        let id = $("#text_id").val();
+        let lastName = $("#text_last_name").val();
+        let firstName = $("#text_first_name").val();
+        let country = $("#text_country").val();
+        let gender = $("#text_gender").val();
+        let team = $("#text_team").val();
 
-<script>
-    // TODO: ADD SCRIPT GAN
+        swal({
+            title: "Are you sure?",
+            text: "Once update, you will not be able to recover this imaginary file!",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        })
+            .then((willUpdate) => {
+                if (willUpdate) {
+
+                    $.ajax({
+                        data: "id=" + id + "&lastName=" + lastName + "&firstName=" + firstName + "&country=" + country + "&gender=" + gender + "&team=" + team,
+                        url: "../../edit/player-update.php",
+                        type: "POST",
+                        success: function (response) {
+                            if (response == 1) {
+                                swal({
+                                    title: "Success Updated!",
+                                    text: "You clicked the button!",
+                                    icon: "success",
+                                    button: "OK!",
+                                })
+                                    .then((value) => {
+                                        location.href = "../players.php";
+                                    });
+
+                            } else {
+                                swal({
+                                    title: "Fail Updated!",
+                                    text: "You clicked the button!",
+                                    icon: "error",
+                                    button: "OK!",
+                                })
+                                    .then((value) => {
+                                        location.href = "../players.php";
+                                    });
+                            }
+                        }
+                    })
+                } else {
+                    swal("Canceled!");
+                }
+            });
+    }
+
+    <!-- ./wrapper -->
+
 </script>
 </body>
 </html>

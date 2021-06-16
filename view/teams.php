@@ -57,11 +57,12 @@ require('../functions/functions.php');
 
                             <div class="card-header">
 
-                            <h3 class="card-title">Data Teams</h3>
+                                <h3 class="card-title">Data Teams</h3>
                                 <div class="card-tools">
                                     <div class="input-group input-group-sm" style="width: 150px;">
                                         <form method="get" action="">
-                                            <input type="text" name="search" class="form-control float-right" placeholder="Search">
+                                            <input type="text" name="search" class="form-control float-right"
+                                                   placeholder="Search">
 
                                         </form>
                                     </div>
@@ -70,74 +71,78 @@ require('../functions/functions.php');
 
                                 <br>
                                 <?php
-                        $db = dbConnect();
-                            if (getTeamsSql()) {
+                                $db = dbConnect();
+                                if (getTeamsSql()) {
                                 ?>
 
-                            <div class="card-body table-responsive p-0"><hr>
-                                <table class="table table-hover text-nowrap table-sm table-striped">
-                                    <thead>
+                                <div class="card-body table-responsive p-0">
+                                    <hr>
+                                    <table class="table table-hover text-nowrap table-sm table-striped">
+                                        <thead>
                                         <tr>
                                             <th>Id Team</th>
                                             <th>Team Name</th>
                                             <th>Region</th>
                                             <th width="50">Action</th>
                                         </tr>
-                                    </thead>
-                                    <?php
-                                    $data = getTeamsSql()->fetch_all(MYSQLI_ASSOC); // ambil seluruh baris data
-                                    if (isset($_GET['search'])) {
-                                        $data = mysqli_query($db, "SELECT * FROM teams WHERE CONCAT(teamName, ' ', region)  LIKE '%". $_GET['search'] . "%'");
-                                    }
-                                    foreach ($data as $barisdata) { // telurusi satu per satu
-                                        ?>
-                                        <tbody>
-                                        <tr>
-                                            <td><?php echo $barisdata["teamId"]; ?></td>
-                                            <td><?php echo $barisdata["teamName"]; ?></td>
-                                            <td><?php echo $barisdata["region"]; ?></td>
-                                            <td>
-                                                <a href="../view/form/teams-form-edit.php?teamId=<?php echo urlencode(
-                                                    openssl_encrypt(
-                                                        $barisdata["teamId"],
-                                                        'aes-128-cbc',
-                                                        $_SESSION["passphrase"],
-                                                        0,
-                                                        $_SESSION["iv"]
-                                                    )
-                                                ); ?>" class="btn btn-warning btn-xs">
-                                                    <i class="fa fa-edit" style="margin-left: 5px;margin-right: 5px;color : #fff"></i>
-                                                </a>
-                                                <button onclick="doDelete('<?= $barisdata['teamId']; ?>')" class="btn btn-danger btn-xs">
-                                                    <i class="fa fa-trash" style="margin-left: 5px;margin-right: 5px;color : #fff"></i>
-                                                </button>
-                                            </td>
-                                        </tr>
-                                            </tbody>
+                                        </thead>
                                         <?php
+                                        $data = getTeamsSql()->fetch_all(MYSQLI_ASSOC); // ambil seluruh baris data
+                                        if (isset($_GET['search'])) {
+                                            $data = mysqli_query($db, "SELECT * FROM teams WHERE CONCAT(teamName, ' ', region)  LIKE '%" . $_GET['search'] . "%'");
+                                        }
+                                        foreach ($data as $barisdata) { // telurusi satu per satu
+                                            ?>
+                                            <tbody>
+                                            <tr>
+                                                <td><?php echo $barisdata["teamId"]; ?></td>
+                                                <td><?php echo $barisdata["teamName"]; ?></td>
+                                                <td><?php echo $barisdata["region"]; ?></td>
+                                                <td>
+                                                    <a href="../view/form/teams-form-edit.php?teamId=<?php echo urlencode(
+                                                        openssl_encrypt(
+                                                            $barisdata["teamId"],
+                                                            'aes-128-cbc',
+                                                            $_SESSION["passphrase"],
+                                                            0,
+                                                            $_SESSION["iv"]
+                                                        )
+                                                    ); ?>" class="btn btn-warning btn-xs">
+                                                        <i class="fa fa-edit"
+                                                           style="margin-left: 5px;margin-right: 5px;color : #fff"></i>
+                                                    </a>
+                                                    <button onclick="doDelete('<?= $barisdata['teamId']; ?>')"
+                                                            class="btn btn-danger btn-xs">
+                                                        <i class="fa fa-trash"
+                                                           style="margin-left: 5px;margin-right: 5px;color : #fff"></i>
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                            </tbody>
+                                            <?php
+                                        }
+                                        ?>
+                                    </table>
+                                    <?php
+                                    } else {
+                                        echo "Failed Connect" . (DEVELOPMENT ? " : " . $db->connect_error : "") . "<br>";
                                     }
                                     ?>
-                                </table>
-                        <?php
-                        } else {
-                            echo "Failed Connect" . (DEVELOPMENT ? " : " . $db->connect_error : "") . "<br>";
-                        }
-                        ?>
-                    </div>
+                                </div>
 
-                    <div class="card-footer clearfix">
-                        <ul class="pagination pagination-sm m-0 float-right">
-                            <li class="page-item"><a class="page-link" href="#">&laquo;</a></li>
-                            <li class="page-item"><a class="page-link" href="#">1</a></li>
-                            <li class="page-item"><a class="page-link" href="#">2</a></li>
-                            <li class="page-item"><a class="page-link" href="#">3</a></li>
-                            <li class="page-item"><a class="page-link" href="#">&raquo;</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <!-- /.row -->
+                                <div class="card-footer clearfix">
+                                    <ul class="pagination pagination-sm m-0 float-right">
+                                        <li class="page-item"><a class="page-link" href="#">&laquo;</a></li>
+                                        <li class="page-item"><a class="page-link" href="#">1</a></li>
+                                        <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                        <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                        <li class="page-item"><a class="page-link" href="#">&raquo;</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <!-- /.row -->
 
-            </div><!-- /.container-fluid -->
+                        </div><!-- /.container-fluid -->
         </section>
         <!-- /.content -->
     </div>
@@ -146,7 +151,7 @@ require('../functions/functions.php');
 
 </div>
 <script type="text/javascript">
-    function doDelete(id){
+    function doDelete(id) {
         swal({
             title: "Are you sure?",
             text: "Once deleted, you will not be able to recover this imaginary file!",
@@ -158,31 +163,31 @@ require('../functions/functions.php');
                 if (willDelete) {
 
                     $.ajax({
-                        data : "id="+id,
-                        url : "../delete/teams-delete.php",
+                        data: "id=" + id,
+                        url: "../delete/teams-delete.php",
 
-                        success: function(response){
-                            if(response==1){
+                        success: function (response) {
+                            if (response == 1) {
                                 swal({
                                     title: "Success Deleted!",
                                     text: "You clicked the button!",
                                     icon: "success",
                                     button: "Aww yiss!",
                                 })
-                                .then((value) => {
-                                    location.reload();
-                                });
+                                    .then((value) => {
+                                        location.reload();
+                                    });
 
-                            }else{
+                            } else {
                                 swal({
                                     title: "Fail Deleted!",
-                                    text: "You clicked the button!",
-                                    icon: "danger",
-                                    button: "Aww yiss!",
+                                    text: "Fail Delete Data!",
+                                    icon: "error",
+                                    button: "OK!",
                                 })
-                                .then((value) => {
-                                    location.reload();
-                                });
+                                    .then((value) => {
+                                        location.reload();
+                                    });
                             }
                         }
                     })

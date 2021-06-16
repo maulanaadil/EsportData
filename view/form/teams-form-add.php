@@ -142,15 +142,15 @@ require('../../functions/functions.php');
                                         location.href="../teams.php";
                                     });
 
-                            }else{
+                            } else {
                                 swal({
-                                    title: "Fail Inserted!",
-                                    text: "You clicked the button!",
+                                    title: "Fail Deleted!",
+                                    text: "Failed Delete Data!",
                                     icon: "error",
                                     button: "OK!",
                                 })
                                     .then((value) => {
-                                        location.href="../teams.php";
+                                        location.reload();
                                     });
                             }
                         }

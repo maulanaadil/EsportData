@@ -7,13 +7,15 @@ function dbConnect()
 }
 
 //Password
-function getPassword($playerId) {
+function getPassword($playerId)
+{
     return "SELECT password from players WHERE players.playerId = '$playerId'";
 
 }
 
 //DASHBOARD
-function getCountPlayers() {
+function getCountPlayers()
+{
     $db = dbConnect();
     $sql = "SELECT count(*) as jml from players";
     $res = $db->query($sql);
@@ -21,14 +23,18 @@ function getCountPlayers() {
     return $data['jml'];
 
 }
-function getCountGames() {
+
+function getCountGames()
+{
     $db = dbConnect();
     $sql = "SELECT count(*) as jml from games";
     $res = $db->query($sql);
     $data = $res->fetch_array();
     return $data['jml'];
 }
-function getCountTeams() {
+
+function getCountTeams()
+{
     $db = dbConnect();
     $sql = "SELECT count(*) as jml from teams";
     $res = $db->query($sql);
@@ -37,18 +43,23 @@ function getCountTeams() {
 }
 
 // Games
-function deleteDataGames($gamesId) {
-    return "DELETE FROM games WHERE gamesId = '$gamesId'";
+function deleteDataGames($gameId)
+{
+    return "DELETE FROM games WHERE gameId = '$gameId'";
 }
 
-function updateDataGames($gamesId ,$gamesName, $playerId) {
-     return "UPDATE games SET gamesName = '$gamesName', playerId = '$playerId' WHERE games.gamesId = '$gamesId'";
+function updateDataGames($gameId, $gameName, $playerId)
+{
+    return "UPDATE games SET games.gameName = '$gameName', games.playerId = '$playerId' WHERE games.gameId = '$gameId'";
 }
 
-function getDataGames($gamesId) {
+function getDataGames($gameId)
+{
     $db = dbConnect();
-    if ($db->connect_errno == 0 ) {
-        $sql = "SELECT games.gamesId, games.gamesName, CONCAT(players.firstName, ' ',players.lastName) as Name, games.playerId FROM games, players WHERE games.gamesId = '$gamesId' AND games.playerId = players.playerId";
+    if ($db->connect_errno == 0) {
+        $sql = "SELECT games.gameId, games.gameName, CONCAT(players.firstName, ' ',players.lastName) as Name , players.playerId  FROM games
+                JOIN players ON games.playerId = players.playerId
+                WHERE games.gameId = '$gameId'";
         $res = $db->query($sql);
         if ($res) {
             if ($res->num_rows > 0) {
@@ -63,17 +74,18 @@ function getDataGames($gamesId) {
         return FALSE;
 }
 
-function addGamesSql($gamesName, $playerId)
+function addGamesSql($gameName, $playerId)
 {
-    return "INSERT INTO games(gamesName, playerId) VALUES ('$gamesName','$playerId')";
+    return "INSERT INTO games(gameName, playerId) VALUES ('$gameName','$playerId')";
 }
 
 function getGamesSql()
 {
     $db = dbConnect();
-    $sql = "SELECT games.gamesId, CONCAT(players.firstName, ' ',players.lastName) as name, games.gamesName, teams.teamName, teams.region
-            FROM games, players, teams
-            WHERE games.playerId = players.playerId AND players.teamId= teams.teamId";
+    $sql = "SELECT games.gameId, CONCAT(players.firstName, ' ',players.lastName) as name, games.gameName, teams.teamName, teams.region
+            FROM games 
+                JOIN players ON players.playerId = games.playerId       
+                JOIN teams ON players.teamId = teams.teamId";
     return $db->query($sql);
 }
 
@@ -202,7 +214,8 @@ function showError($message)
     <?php
 }
 
-function templateAdd(){
+function templateAdd()
+{
     ?>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -216,10 +229,11 @@ function templateAdd(){
     <script src="../../assets/plugins/jquery-ui/jquery-ui.min.js"></script>
     <script src="../../assets/js/adminlte.js"></script>
     <script src="../../assets/js/sweetalert.min.js"></script>
-<?php
+    <?php
 }
 
-function template(){
+function template()
+{
     ?>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -233,11 +247,12 @@ function template(){
     <script src="../assets/plugins/jquery-ui/jquery-ui.min.js"></script>
     <script src="../assets/js/adminlte.js"></script>
     <script src="../assets/js/sweetalert.min.js"></script>
-<?php
+    <?php
 }
 
 
-function getMenuAdd(){
+function getMenuAdd()
+{
     ?>
     <!-- Navbar -->
     <nav class="main-header navbar navbar-expand navbar-white navbar-light">
@@ -248,7 +263,8 @@ function getMenuAdd(){
             <!-- Notifications Dropdown Menu -->
 
             <li class="nav-item">
-                <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#" role="button">
+                <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="../logout.php" role="button"
+                   onclick="location.href= '../../logout.php'">
                     <i class="fas fa-door-open"></i> Logout
                 </a>
             </li>
@@ -269,7 +285,8 @@ function getMenuAdd(){
 
             <!-- Sidebar Menu -->
             <nav class="mt-2">
-                <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
+                    data-accordion="false">
                     <!-- Add icons to the links using the .nav-icon class
                          with font-awesome or any other icon font library -->
                     <li class="nav-item has-treeview menu-open">
@@ -315,10 +332,11 @@ function getMenuAdd(){
         </div>
         <!-- /.sidebar -->
     </aside>
-<?php
+    <?php
 }
 
-function getMenu(){
+function getMenu()
+{
     ?>
     <!-- Navbar -->
     <nav class="main-header navbar navbar-expand navbar-white navbar-light">
@@ -334,7 +352,8 @@ function getMenu(){
             <!-- Notifications Dropdown Menu -->
 
             <li class="nav-item">
-                <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#" role="button">
+                <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="../logout.php" role="button"
+                   onclick="location.href= '../logout.php' ">
                     <i class="fas fa-door-open"></i> Logout
                 </a>
             </li>
@@ -355,7 +374,8 @@ function getMenu(){
 
             <!-- Sidebar Menu -->
             <nav class="mt-2">
-                <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
+                    data-accordion="false">
                     <!-- Add icons to the links using the .nav-icon class
                          with font-awesome or any other icon font library -->
                     <li class="nav-item has-treeview menu-open">
@@ -401,15 +421,17 @@ function getMenu(){
         </div>
         <!-- /.sidebar -->
     </aside>
-<?php
+    <?php
 }
 
 
-function getFooter(){
+function getFooter()
+{
     ?>
     <!-- /.content-wrapper -->
     <footer class="main-footer">
-        <strong>Copyright &copy; <?= date("Y"); ?> <a target="_blank" href="https://github.com/maulanaadil">Maulana Adil</a>.</strong>
+        <strong>Copyright &copy; <?= date("Y"); ?> <a target="_blank" href="https://github.com/maulanaadil">Maulana
+                Adil</a>.</strong>
         All rights reserved.
     </footer>
 

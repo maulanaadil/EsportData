@@ -11,7 +11,6 @@ require('../functions/functions.php');
     <title>View Players</title>
     <?php template() ?>
 </head>
-<body>
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
 
@@ -149,7 +148,7 @@ require('../functions/functions.php');
     <?php getFooter(); ?>
 </div>
 <script type="text/javascript">
-    function doDelete(id){
+    function doDelete(id) {
         swal({
             title: "Are you sure?",
             text: "Once deleted, you will not be able to recover this imaginary file!",
@@ -161,11 +160,11 @@ require('../functions/functions.php');
                 if (willDelete) {
 
                     $.ajax({
-                        data : "id="+id,
-                        url : "../delete/players-delete.php",
+                        data: "id=" + id,
+                        url: "../delete/players-delete.php",
 
-                        success: function(response){
-                            if(response===1){
+                        success: function (response) {
+                            if (response == 1) {
                                 swal({
                                     title: "Success Deleted!",
                                     text: "You clicked the button!",
@@ -176,12 +175,12 @@ require('../functions/functions.php');
                                         location.reload();
                                     });
 
-                            }else{
+                            } else {
                                 swal({
                                     title: "Fail Deleted!",
-                                    text: "You clicked the button!",
-                                    icon: "danger",
-                                    button: "Aww yiss!",
+                                    text: "Failed Delete Data!",
+                                    icon: "error",
+                                    button: "OK!",
                                 })
                                     .then((value) => {
                                         location.reload();
