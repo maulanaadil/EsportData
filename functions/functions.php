@@ -2,7 +2,7 @@
 define("DEVELOPMENT", true);
 function dbConnect()
 {
-    $db = new mysqli("localhost", "maulnadm_root", "admin123", "maulnadm_esport");
+    $db = new mysqli("localhost", "root", "", "esport");
     return $db;
 }
 
