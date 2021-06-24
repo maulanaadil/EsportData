@@ -128,6 +128,17 @@ require('../../functions/functions.php');
                                         location.href = "../games.php";
                                     });
 
+                            } else
+                            if (response == 2) {
+                                swal({
+                                    title: "Succes Inserted Without Changes!",
+                                    text: "Nice",
+                                    icon: "success",
+                                    button: "OK!",
+                                })
+                                    .then((value) => {
+                                        location.href = "../games.php";
+                                    });
                             } else {
                                 swal({
                                     title: "Fail Deleted!",

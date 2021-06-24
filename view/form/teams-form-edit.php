@@ -124,6 +124,17 @@ require('../../functions/functions.php');
                                         location.href="../teams.php";
                                     });
 
+                            } else
+                            if (response == 2) {
+                                swal({
+                                    title: "Succes Inserted Without Changes!",
+                                    text: "Nice",
+                                    icon: "success",
+                                    button: "OK!",
+                                })
+                                    .then((value) => {
+                                        location.href = "../games.php";
+                                    });
                             } else {
                                 swal({
                                     title: "Fail Deleted!",
@@ -132,7 +143,7 @@ require('../../functions/functions.php');
                                     button: "OK!",
                                 })
                                     .then((value) => {
-                                        location.reload();
+                                        location.href="../teams.php";
                                     });
                             }
                         }

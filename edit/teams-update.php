@@ -11,7 +11,7 @@ require('../functions/functions.php');
             if ($db->affected_rows > 0) {
                 echo 1;
             } else {
-               echo 0;
+               echo 2;
             }
         } else {
            echo 0;
